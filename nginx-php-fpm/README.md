@@ -30,10 +30,10 @@ The following flags are a list of all the currently supported options that can b
  - **PHP_MEM_LIMIT** : Set higher PHP memory limit, default is 128 Mb
  - **PHP_POST_MAX_SIZE** : Set a larger post_max_size, default is 100 Mb
  - **PHP_UPLOAD_MAX_FILESIZE** : Set a larger upload_max_filesize, default is 100 Mb
- - **XDEBUG_ENABLE** : Enable Xdebug
- - **XDEBUG_IDEKEY** : IDE Key Xdebug
+ - **XDEBUG_ENABLE** : Enable Xdebug debugger
+ - **XDEBUG_IDEKEY** : Controls which IDE Key Xdebug should pass on to the DBGp debugger handler.
+ - **XDEBUG_REMOTE_HOST** : Host where the debug client is running
  - **APP_ENV** : Application environment
-
 
 Examples
 --------
@@ -46,3 +46,5 @@ Logging and Errors
 All logs should now print out in stdout/stderr and are available via the docker logs command:
 ```
 docker logs <CONTAINER_NAME>
+```
+
