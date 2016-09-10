@@ -3,7 +3,13 @@
 # tweak php-fpm config
 php_conf=/etc/php7/php.ini 
 
-sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf}
+sed -i -e "s/;cgi.fix_pathinfo\s*=\s*1/cgi.fix_pathinfo = 0/g" ${php_conf}
+sed -i -e "s/;xmlrpc_errors\s*=\s*0/xmlrpc_errors = 1/g" ${php_conf}
+sed -i -e "s/;realpath_cache_size\s*=\s*16k/realpath_cache_size = 128k/g" ${php_conf}
+sed -i -e "s/;opcache.max_accelerated_files\s*=\s*2000/opcache.max_accelerated_files = 32000/g" ${php_conf}
+sed -i -e "s/;opcache.memory_consumption\s*=\s*64/opcache.memory_consumption = 128/g" ${php_conf}
+sed -i -e "s/;opcache.fast_shutdown\s*=\s*0/opcache.fast_shutdown = 0/g" ${php_conf}
+sed -i -e "s/track_errors\s*=\s*Off/track_errors = On/g" ${php_conf}
 sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf}
 sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf}
 sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf}
