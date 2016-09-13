@@ -21,6 +21,9 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
         openssh-client \
         supervisor \
         nginx \
+        php5 \
+        php5-common \
+        php5-cli \
         php5-fpm \
         php5-pdo \
         php5-pdo_mysql \
@@ -83,9 +86,8 @@ RUN mkdir -p /etc/nginx/sites-enabled /etc/nginx/ssl /var/log/supervisor /run/ng
     && rm -Rf /var/www/* \
     && mkdir -p /var/www/html
     
-# Nginx default vhost file    
+# Nginx default vhost file
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
-
 
 # Injecting s assets files
 ADD .docker /
