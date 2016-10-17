@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # tweak nginx config
-fpm_conf=/etc/php7/php-fpm.d/www.conf
+fpm_conf=/etc/php5/php-fpm.conf
 
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" ${fpm_conf}
 sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf}
@@ -30,7 +30,7 @@ fi
 if [[ "${HIDE_NGINX_HEADERS-}" == "0" ]] ; then
  sed -i "s/server_tokens off;/server_tokens on;/g" /etc/nginx/nginx.conf
 else
- sed -i "s/expose_php = On/expose_php = Off/g" /etc/php7/conf.d/php.ini
+ sed -i "s/expose_php = On/expose_php = Off/g" /etc/php5/conf.d/php.ini
 fi
 
 # Always chown webroot for better mounting

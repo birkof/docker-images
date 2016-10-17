@@ -21,30 +21,33 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
         openssh-client \
         supervisor \
         nginx \
-        php7-fpm \
-        php7-pdo \
-        php7-pdo_mysql \
-        php7-mysqlnd \
-        php7-mysqli \
-        php7-mcrypt \
-        php7-ctype \
-        php7-zlib \
-        php7-gd \
-        php7-intl \
-        php7-sqlite3 \
-        php7-pdo_pgsql \
-        php7-pgsql \
-        php7-xml \
-        php7-xsl \
-        php7-curl \
-        php7-openssl \
-        php7-iconv \
-        php7-json \
-        php7-phar \
-        php7-dom \
-        php7-zip \
-        php7-session \
-        php7-xdebug  \
+        php5 \
+        php5-common \
+        php5-cli \
+        php5-fpm \
+        php5-pdo \
+        php5-pdo_mysql \
+        php5-mysql \
+        php5-mysqli \
+        php5-mcrypt \
+        php5-ctype \
+        php5-zlib \
+        php5-gd \
+        php5-intl \
+        php5-memcache \
+        php5-sqlite3 \
+        php5-pgsql \
+        php5-xml \
+        php5-xsl \
+        php5-curl \
+        php5-openssl \
+        php5-iconv \
+        php5-json \
+        php5-phar \
+        php5-soap \
+        php5-dom \
+        php5-zip \
+        php5-xdebug  \
         python \
         python-dev \
         py-pip \
@@ -66,12 +69,6 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     && rm -rf /var/cache/apk/* \
     && find / -type f -iname \*.apk-new -delete
 
-
-# Small fixes
-RUN ln -s /etc/php7 /etc/php \
-    && ln -s /usr/bin/php7 /usr/bin/php \
-    && ln -s /usr/lib/php7 /usr/lib/php
-
 # Install composer
 RUN curl -LsS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --version
@@ -89,9 +86,8 @@ RUN mkdir -p /etc/nginx/sites-enabled /etc/nginx/ssl /var/log/supervisor /run/ng
     && rm -Rf /var/www/* \
     && mkdir -p /var/www/html
     
-# Nginx default vhost file    
+# Nginx default vhost file
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
-
 
 # Injecting s assets files
 ADD .docker /
