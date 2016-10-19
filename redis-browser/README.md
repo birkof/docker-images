@@ -1,6 +1,6 @@
-# Redis Browser Docker Image
+# Minimal Redis Browser Docker Image
 
-A [Docker](https://www.docker.com/) container for [Redis Commander](https://github.com/humante/redis-browser).
+A [Docker](https://www.docker.com/) container for [Redis Browser](https://github.com/humante/redis-browser).
 
 ## Example usage
 ```bash
@@ -8,7 +8,7 @@ docker run --name redis-container -d redis && \
 docker run -d --link redis-container:redis -p 4567:4567 birkof/redis-browser --url redis://redis-container:6379
 ```
 
-Redis Commander will be running on port: `8081`
+Redis Browser will be running on port: `4567`
 
 ### Via Docker compose
 `docker-compose.yml`
