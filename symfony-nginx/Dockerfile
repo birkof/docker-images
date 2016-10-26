@@ -1,10 +1,7 @@
 FROM nginx:alpine
 
-# Ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+RUN addgroup -g 1000 -S www-data \
+    && adduser -u 1000 -D -S -G www-data www-data
 
 # Injecting assets
 ADD .docker /
-
-# Working dir
-WORKDIR /var/www/html

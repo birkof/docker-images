@@ -84,8 +84,8 @@ RUN curl -LsS http://symfony.com/installer -o /usr/local/bin/symfony \
     && symfony --version
 
 # Symfony console shortcuts
-RUN echo '#!/bin/bash' > /usr/local/bin/dev && echo 'php -dmemory_limit=-1 console --env=dev $@' >> /usr/local/bin/dev && chmod +x /usr/local/bin/dev \
-    && echo '#!/bin/bash' > /usr/local/bin/prod && echo 'php console --env=prod $@' >> /usr/local/bin/prod && chmod +x /usr/local/bin/prod
+RUN echo '#!/bin/bash' > /usr/local/bin/dev && echo 'php -dmemory_limit=-1 ${APP_DIR}/bin/console --env=dev $@' >> /usr/local/bin/dev && chmod +x /usr/local/bin/dev \
+    && echo '#!/bin/bash' > /usr/local/bin/prod && echo 'php ${APP_DIR}/bin/console --env=prod $@' >> /usr/local/bin/prod && chmod +x /usr/local/bin/prod
 
 # Clean up the mess
 RUN apt-get autoclean \
@@ -95,7 +95,8 @@ RUN apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+RUN usermod -u 1000 www-data && \
+    groupmod -g 1000 www-data
 
 # Injecting assets
 ADD .docker /
@@ -106,9 +107,6 @@ RUN mv /bootstrap.sh /usr/local/bin/bootstrap \
 
 # Working dir
 WORKDIR ${APP_DIR}
-
-# Volume mounting between containers
-VOLUME ${APP_DIR}/var/logs
 
 # Exposed port
 EXPOSE 9000
