@@ -22,3 +22,15 @@ redis-browser:
     - 4567:4567
 ```
 Followed by: `docker-compose up`
+
+### Available CLI Options
+```
+# redis-browser --help
+Usage: redis-browser [options]
+    -C, --config PATH                Path to YAML config file
+    -U, --url URL                    Connection URL. Defaults to redis://127.0.0.1:6379/0
+    -B, --bind ADDRESS               Server hostname or IP address to listen on
+    -P, --port PORT                  Port number to listen on
+```
+
+> For docker not running on localhost/127.0.0.1 you will need to set the bind address accordingly. For non-production environments `0.0.0.0` can be used to allow all ip addresses `--bind 0.0.0.0`.
